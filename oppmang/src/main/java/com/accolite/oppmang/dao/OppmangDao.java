@@ -8,7 +8,7 @@ import com.accolite.oppmang.model.*;
 
 public interface OppmangDao {
 	
-	public List<Opportunity> getOpportunities();
+	public List<OppAndSkills> getOpportunities();
 	
 	public List<Emptype> getEmptypes();
 	
@@ -24,13 +24,13 @@ public interface OppmangDao {
 	
 	public List<Team> getTeams();
 	
-	public int addOpportunity(Opportunity opportunity);
+	public int addOpportunity(OppAndSkills oppAndSkills);
 	
-	public int updateOpportunity(Opportunity opportunity);
+	public int updateOpportunity(OppAndSkills oppAndSkills);
 	
 	public int deleteOpportunity(int id);
 	
-	public Opportunity getOpportunity(int id);
+	public OppAndSkills getOpportunity(int id);
 	
 
 }

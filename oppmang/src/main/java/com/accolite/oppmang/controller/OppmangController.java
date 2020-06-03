@@ -17,7 +17,7 @@ public class OppmangController {
 	private OppmangServiceImpl oppmangService;
 	
 	@GetMapping(value = "/opportunities")
-	public List<Opportunity> getOpportunities() {
+	public List<OppAndSkills> getOpportunities() {
 
 		return oppmangService.getOpportunities();
 	}
@@ -64,15 +64,15 @@ public class OppmangController {
 	}
 
 	@PostMapping(value = "/opportunities", consumes = "application/json", produces = "application/json")
-	public int addOpportunity(@RequestBody Opportunity opportunity) {
+	public int addOpportunity(@RequestBody OppAndSkills oppAndSkills) {
 		
-		return oppmangService.addOpportunity(opportunity);
+		return oppmangService.addOpportunity(oppAndSkills);
 	}
 
 	@PutMapping(value = "/opportunities/{id}")
-	public int updateOpportunity(@RequestBody Opportunity opportunity) {
+	public int updateOpportunity(@RequestBody OppAndSkills oppAndSkills) {
 	
-		return oppmangService.updateOpportunity(opportunity);
+		return oppmangService.updateOpportunity(oppAndSkills);
 	}
 
 	@DeleteMapping(value = "/opportunities/{id}")
@@ -82,7 +82,7 @@ public class OppmangController {
 	}
 
 	@GetMapping(value = "/opportunities/{id}")
-	public Opportunity getOpportunity(@PathVariable int id) {
+	public OppAndSkills getOpportunity(@PathVariable int id) {
 
 		return oppmangService.getOpportunity(id);
 	}

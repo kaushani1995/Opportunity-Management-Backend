@@ -1,6 +1,6 @@
 package com.accolite.oppmang.dao;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +11,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accolite.oppmang.model.*;
-import com.accolite.oppmang.rowmapper.EmptypeRowMapper;
 import com.accolite.oppmang.rowmapper.LocationRowMapper;
 import com.accolite.oppmang.rowmapper.OpportunityRowMapper;
 import com.accolite.oppmang.rowmapper.PositionRowMapper;
-import com.accolite.oppmang.rowmapper.RoleRowMapper;
 import com.accolite.oppmang.rowmapper.SkillsetRowMapper;
 import com.accolite.oppmang.rowmapper.StatusRowMapper;
 import com.accolite.oppmang.rowmapper.TeamRowMapper;
+import com.accolite.oppmang.rowmapper.UserRowMapper;
 
 @Transactional
 @Repository
@@ -28,31 +27,22 @@ public class OppmangDaoImpl implements OppmangDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<OppAndSkills> getOpportunities() {
+	public List<Opportunity> getOpportunities() {
 		 String query = "SELECT * from opportunity";
-		 String query2 = "SELECT s.idSkillset, s.name FROM oppskilljunction o JOIN skillset s ON s.idSkillSet = o.idSkillSet " + 
-		 		"WHERE idOpportunity = ?";
+		 //String query2 = "SELECT s.idSkillset, s.name FROM oppskilljunction o JOIN skillset s ON s.idSkillSet = o.idSkillSet " + 
+		 //		"WHERE idOpportunity = ?";
 		 RowMapper<Opportunity> rowMapper = new OpportunityRowMapper();
 		 List<Opportunity> list = jdbcTemplate.query(query, rowMapper);
 		 
-		 List<OppAndSkills> oslist = new ArrayList<OppAndSkills>();
+		 //List<OppAndSkills> oslist = new ArrayList<OppAndSkills>();
 		
-		 list.forEach(opp -> {
-			 RowMapper<Skillset> rowMapper2 = new SkillsetRowMapper();
-			 List<Skillset> list2 = jdbcTemplate.query(query2, rowMapper2, opp.getIdOpportunity());
+		 //list.forEach(opp -> {
+		//	 RowMapper<Skillset> rowMapper2 = new SkillsetRowMapper();
+		//	 List<Skillset> list2 = jdbcTemplate.query(query2, rowMapper2, opp.getIdOpportunity());
 			 
-			 oslist.add(new OppAndSkills(opp, list2));	 
-		 });
+		//	 oslist.add(new OppAndSkills(opp, list2));	 
+		 //});
 		 
-		 return oslist;
-	}
-
-	@Override
-	public List<Emptype> getEmptypes() {
-		 String query = "SELECT * from emptype";
-		 RowMapper<Emptype> rowMapper = new EmptypeRowMapper();
-		 List<Emptype> list = jdbcTemplate.query(query, rowMapper);
-		  
 		 return list;
 	}
 
@@ -70,15 +60,6 @@ public class OppmangDaoImpl implements OppmangDao {
 		 String query = "SELECT * from position";
 		 RowMapper<Position> rowMapper = new PositionRowMapper();
 		 List<Position> list = jdbcTemplate.query(query, rowMapper);
-		  
-		 return list;
-	}
-
-	@Override
-	public List<Role> getRoles() {
-		 String query = "SELECT * from role";
-		 RowMapper<Role> rowMapper = new RoleRowMapper();
-		 List<Role> list = jdbcTemplate.query(query, rowMapper);
 		  
 		 return list;
 	}
@@ -112,11 +93,11 @@ public class OppmangDaoImpl implements OppmangDao {
 
 	@Override
 	public int addOpportunity(OppAndSkills oppAndSkills) {
-		String query = "INSERT INTO opportunity(idOpportunity, title, createdBy, createdTS, updatedBy, updatedTS,"
-				+ " idStatus, idLocation, idTeam, jobDesc, idEmpType, hiringManager, idPosition) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		jdbcTemplate.update(query, oppAndSkills.getOpportunity().getIdOpportunity(), oppAndSkills.getOpportunity().getTitle(), oppAndSkills.getOpportunity().getCreatedBy(),oppAndSkills.getOpportunity().getCreatedTS(),
+		String query = "INSERT INTO opportunity(idOpportunity, createdBy, createdTS, updatedBy, updatedTS,"
+				+ " idStatus, idLocation, idTeam, jobDesc, hiringManager, idPosition) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		jdbcTemplate.update(query, oppAndSkills.getOpportunity().getIdOpportunity(), oppAndSkills.getOpportunity().getCreatedBy(),oppAndSkills.getOpportunity().getCreatedTS(),
 				oppAndSkills.getOpportunity().getUpdatedBy(),oppAndSkills.getOpportunity().getUpdatedTS(),oppAndSkills.getOpportunity().getIdStatus(), oppAndSkills.getOpportunity().getIdLocation(),oppAndSkills.getOpportunity().getIdTeam(),
-				oppAndSkills.getOpportunity().getJobDesc(),oppAndSkills.getOpportunity().getIdEmpType(), oppAndSkills.getOpportunity().getHiringManager(), oppAndSkills.getOpportunity().getIdPosition());
+				oppAndSkills.getOpportunity().getJobDesc(), oppAndSkills.getOpportunity().getHiringManager(), oppAndSkills.getOpportunity().getIdPosition());
 		
 		String query2 = "SELECT * FROM opportunity WHERE idOpportunity =( SELECT MAX(idOpportunity) FROM opportunity);";
 		RowMapper<Opportunity> rowMapper = new BeanPropertyRowMapper<Opportunity>(Opportunity.class);
@@ -132,11 +113,11 @@ public class OppmangDaoImpl implements OppmangDao {
 
 	@Override
 	public int updateOpportunity(OppAndSkills oppAndSkills) {
-		String query = "UPDATE opportunity SET title=?, createdBy=?, createdTS=?, updatedBy=?, updatedTS=?,"
-				+ "idStatus=?, idLocation=?, idTeam=?, jobDesc=?, idEmpType=?, hiringManager=?, idPosition=? WHERE idOpportunity=?";
-		jdbcTemplate.update(query, oppAndSkills.getOpportunity().getTitle(), oppAndSkills.getOpportunity().getCreatedBy(),oppAndSkills.getOpportunity().getCreatedTS(),
+		String query = "UPDATE opportunity SET createdBy=?, createdTS=?, updatedBy=?, updatedTS=?,"
+				+ "idStatus=?, idLocation=?, idTeam=?, jobDesc=?, hiringManager=?, idPosition=? WHERE idOpportunity=?";
+		jdbcTemplate.update(query,oppAndSkills.getOpportunity().getCreatedBy(),oppAndSkills.getOpportunity().getCreatedTS(),
 				oppAndSkills.getOpportunity().getUpdatedBy(),oppAndSkills.getOpportunity().getUpdatedTS(),oppAndSkills.getOpportunity().getIdStatus(), oppAndSkills.getOpportunity().getIdLocation(),oppAndSkills.getOpportunity().getIdTeam(),
-				oppAndSkills.getOpportunity().getJobDesc(),oppAndSkills.getOpportunity().getIdEmpType(), oppAndSkills.getOpportunity().getHiringManager(), oppAndSkills.getOpportunity().getIdPosition(), oppAndSkills.getOpportunity().getIdOpportunity());
+				oppAndSkills.getOpportunity().getJobDesc(),oppAndSkills.getOpportunity().getHiringManager(), oppAndSkills.getOpportunity().getIdPosition(), oppAndSkills.getOpportunity().getIdOpportunity());
 		
 		String query2 = "DELETE FROM oppskilljunction WHERE idOpportunity = ?";
 		jdbcTemplate.update(query2, oppAndSkills.getOpportunity().getIdOpportunity());
@@ -169,6 +150,23 @@ public class OppmangDaoImpl implements OppmangDao {
 		 OppAndSkills oppAndSkills = new OppAndSkills(opportunity, list2);
 		 
 		 return oppAndSkills;
+	}
+
+	@Override
+	public User getUser(String email) {
+		String query = "SELECT * FROM user WHERE email = ?";
+		RowMapper<User> rowMapper = new BeanPropertyRowMapper<User>(User.class);
+		User user = jdbcTemplate.queryForObject(query, rowMapper, email);
+		return user;
+	}
+
+	@Override
+	public List<User> getUsers() {
+		String query = "SELECT * from user";
+		 RowMapper<User> rowMapper = new UserRowMapper();
+		 List<User> list = jdbcTemplate.query(query, rowMapper);
+		  
+		 return list;
 	}
 
 }

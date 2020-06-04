@@ -5,17 +5,15 @@ import java.sql.Timestamp;
 public class Opportunity {
 	
 	private Integer idOpportunity;
-	private String title;
-	private Integer createdBy;
+	private String createdBy;
 	private Timestamp createdTS;
-	private Integer updatedBy;
+	private String updatedBy;
 	private Timestamp updatedTS;
 	private Integer idStatus;
 	private Integer idTeam;
 	private Integer idLocation;
 	private String jobDesc;
-	private Integer idEmpType;
-	private Integer hiringManager;
+	private String hiringManager;
 	private Integer idPosition;
 	public Integer getIdOpportunity() {
 		return idOpportunity;
@@ -23,22 +21,16 @@ public class Opportunity {
 	public void setIdOpportunity(Integer idOpportunity) {
 		this.idOpportunity = idOpportunity;
 	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public Integer getCreatedBy() {
+	public String getCreatedBy() {
 		return createdBy;
 	}
-	public void setCreatedBy(Integer createdBy) {
+	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
-	public Integer getUpdatedBy() {
+	public String getUpdatedBy() {
 		return updatedBy;
 	}
-	public void setUpdatedBy(Integer updatedBy) {
+	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
@@ -66,16 +58,10 @@ public class Opportunity {
 	public void setJobDesc(String jobDesc) {
 		this.jobDesc = jobDesc;
 	}
-	public Integer getIdEmpType() {
-		return idEmpType;
-	}
-	public void setIdEmpType(Integer idEmpType) {
-		this.idEmpType = idEmpType;
-	}
-	public Integer getHiringManager() {
+	public String getHiringManager() {
 		return hiringManager;
 	}
-	public void setHiringManager(Integer hiringManager) {
+	public void setHiringManager(String hiringManager) {
 		this.hiringManager = hiringManager;
 	}
 	public Integer getIdPosition() {

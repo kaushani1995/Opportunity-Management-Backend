@@ -8,15 +8,11 @@ import com.accolite.oppmang.model.*;
 
 public interface OppmangDao {
 	
-	public List<OppAndSkills> getOpportunities();
-	
-	public List<Emptype> getEmptypes();
+	public List<Opportunity> getOpportunities();
 	
 	public List<Location> getLocations();
 	
 	public List<Position> getPositions();
-	
-	public List<Role> getRoles();
 	
 	public List<Skillset> getSkillsets();
 	
@@ -32,5 +28,8 @@ public interface OppmangDao {
 	
 	public OppAndSkills getOpportunity(int id);
 	
+	public User getUser(String email);
+
+	public List<User> getUsers();
 
 }

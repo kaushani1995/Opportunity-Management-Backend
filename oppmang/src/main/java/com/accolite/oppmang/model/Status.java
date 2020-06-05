@@ -2,8 +2,16 @@ package com.accolite.oppmang.model;
 
 public class Status {
 	
+	public Status() {
+		super();
+	}
 	private Integer idStatus;
 	private String currStatus;
+	public Status(Integer idStatus, String currStatus) {
+		super();
+		this.idStatus = idStatus;
+		this.currStatus = currStatus;
+	}
 	public Integer getIdStatus() {
 		return idStatus;
 	}

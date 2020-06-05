@@ -3,7 +3,6 @@ package com.accolite.oppmang.service;
 import java.util.List;
 
 import com.accolite.oppmang.model.Location;
-import com.accolite.oppmang.model.OppAndSkills;
 import com.accolite.oppmang.model.Opportunity;
 import com.accolite.oppmang.model.Position;
 import com.accolite.oppmang.model.Skillset;
@@ -25,13 +24,13 @@ public interface OppmangService {
 	
 	public List<Team> getTeams();
 	
-	public int addOpportunity(OppAndSkills oppAndSkills);
+	public int addOpportunity(Opportunity opportunity);
 	
-	public int updateOpportunity(OppAndSkills oppAndSkills);
+	public int updateOpportunity(Opportunity opportunity);
 	
 	public int deleteOpportunity(int id);
 	
-	public OppAndSkills getOpportunity(int id);
+	public Opportunity getOpportunity(int id);
 	
 	public List<User> getUsers();
 	

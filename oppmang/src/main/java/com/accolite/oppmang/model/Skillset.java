@@ -2,9 +2,17 @@ package com.accolite.oppmang.model;
 
 public class Skillset {
 	
+	public Skillset() {
+		super();
+	}
 	private Integer idSkillset;
 	private String name;
 	
+	public Skillset(Integer idSkillset, String name) {
+		super();
+		this.idSkillset = idSkillset;
+		this.name = name;
+	}
 	public Integer getIdSkillset() {
 		return idSkillset;
 	}

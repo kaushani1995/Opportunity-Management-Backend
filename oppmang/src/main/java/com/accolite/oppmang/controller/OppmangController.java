@@ -12,7 +12,7 @@ import com.accolite.oppmang.service.OppmangServiceImpl;
 @RestController
 @RequestMapping(path = "/oppmang")
 public class OppmangController {
-	
+
 	@Autowired
 	private OppmangServiceImpl oppmangService;
 	
@@ -86,11 +86,11 @@ public class OppmangController {
 	
 	@GetMapping(value = "/teams/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public Team geTeam(@PathVariable int id) {
+	public Team getTeam(@PathVariable int id) {
 		for(Team team : this.getTeams()) {
 			if(team.getIdTeam()==id) { return team;}
 		}
-		return null;
+		return null; 
 	}
 	
 	
@@ -110,16 +110,16 @@ public class OppmangController {
 
 	@PostMapping(value = "/opportunities", consumes = "application/json", produces = "application/json")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public int addOpportunity(@RequestBody OppAndSkills oppAndSkills) {
+	public int addOpportunity(@RequestBody Opportunity opportunity) {
 		
-		return oppmangService.addOpportunity(oppAndSkills);
+		return oppmangService.addOpportunity(opportunity);
 	}
 
 	@PutMapping(value = "/opportunities/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public int updateOpportunity(@RequestBody OppAndSkills oppAndSkills) {
+	public int updateOpportunity(@RequestBody Opportunity opportunity) {
 	
-		return oppmangService.updateOpportunity(oppAndSkills);
+		return oppmangService.updateOpportunity(opportunity);
 	}
 
 	@DeleteMapping(value = "/opportunities/{id}")
@@ -131,7 +131,7 @@ public class OppmangController {
 
 	@GetMapping(value = "/opportunities/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public OppAndSkills getOpportunity(@PathVariable int id) {
+	public Opportunity getOpportunity(@PathVariable int id) {
 
 		return oppmangService.getOpportunity(id);
 	}

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.accolite.oppmang.dao.OppmangDaoImpl;
 import com.accolite.oppmang.model.Location;
-import com.accolite.oppmang.model.OppAndSkills;
 import com.accolite.oppmang.model.Opportunity;
 import com.accolite.oppmang.model.Position;
 import com.accolite.oppmang.model.Skillset;
@@ -59,15 +58,15 @@ public class OppmangServiceImpl implements OppmangService{
 	}
 
 	@Override
-	public int addOpportunity(OppAndSkills oppAndSkills) {
+	public int addOpportunity(Opportunity opportunity) {
 		
-		return oppmangDao.addOpportunity(oppAndSkills);
+		return oppmangDao.addOpportunity(opportunity);
 	}
 
 	@Override
-	public int updateOpportunity(OppAndSkills oppAndSkills) {
+	public int updateOpportunity(Opportunity opportunity) {
 	
-		return oppmangDao.updateOpportunity(oppAndSkills);
+		return oppmangDao.updateOpportunity(opportunity);
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public class OppmangServiceImpl implements OppmangService{
 	}
 
 	@Override
-	public OppAndSkills getOpportunity(int id) {
+	public Opportunity getOpportunity(int id) {
 
 		return oppmangDao.getOpportunity(id);
 	}
@@ -87,7 +86,7 @@ public class OppmangServiceImpl implements OppmangService{
 		
 		return oppmangDao.getUser(email);
 	}
-
+	
 	@Override
 	public List<User> getUsers() {
 

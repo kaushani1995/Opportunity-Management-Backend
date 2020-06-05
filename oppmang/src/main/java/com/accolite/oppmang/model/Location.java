@@ -2,6 +2,14 @@ package com.accolite.oppmang.model;
 
 public class Location {
 	
+	public Location() {
+		super();
+	}
+	public Location(Integer idLocation, String name) {
+		super();
+		this.idLocation = idLocation;
+		this.name = name;
+	}
 	private Integer idLocation;
 	private String name;
 	

@@ -7,12 +7,16 @@ public class OppAndSkills {
 	private Opportunity opportunity;
 	private List<Skillset> skillset;
 	
+	public OppAndSkills() {
+		super();
+	}
+
 	public OppAndSkills(Opportunity opportunity, List<Skillset> skillset) {
 		super();
 		this.opportunity = opportunity;
 		this.skillset = skillset;
 	}
-	
+
 	public Opportunity getOpportunity() {
 		return opportunity;
 	}

@@ -2,9 +2,18 @@ package com.accolite.oppmang.model;
 
 public class User {
 	
+	public User() {
+		super();
+	}
 	private String email;
 	private String name;
 	private String role;
+	public User(String email, String name, String role) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.role = role;
+	}
 	public String getEmail() {
 		return email;
 	}

@@ -20,13 +20,13 @@ public interface OppmangDao {
 	
 	public List<Team> getTeams();
 	
-	public int addOpportunity(OppAndSkills oppAndSkills);
+	public int addOpportunity(Opportunity opportunity);
 	
-	public int updateOpportunity(OppAndSkills oppAndSkills);
+	public int updateOpportunity(Opportunity opportunity);
 	
 	public int deleteOpportunity(int id);
 	
-	public OppAndSkills getOpportunity(int id);
+	public Opportunity getOpportunity(int id);
 	
 	public User getUser(String email);
 

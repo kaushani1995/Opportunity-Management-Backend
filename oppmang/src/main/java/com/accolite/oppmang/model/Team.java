@@ -2,9 +2,17 @@ package com.accolite.oppmang.model;
 
 public class Team {
 	
+	public Team() {
+		super();
+	}
 	private Integer idTeam;
 	private String name;
 	
+	public Team(Integer idTeam, String name) {
+		super();
+		this.idTeam = idTeam;
+		this.name = name;
+	}
 	public Integer getIdTeam() {
 		return idTeam;
 	}

@@ -15,6 +15,25 @@ public class Opportunity {
 	private String jobDesc;
 	private String hiringManager;
 	private Integer idPosition;
+	public Opportunity() {
+		super();
+	}
+	public Opportunity(Integer idOpportunity, String createdBy, Timestamp createdTS, String updatedBy,
+			Timestamp updatedTS, Integer idStatus, Integer idTeam, Integer idLocation, String jobDesc,
+			String hiringManager, Integer idPosition) {
+		super();
+		this.idOpportunity = idOpportunity;
+		this.createdBy = createdBy;
+		this.createdTS = createdTS;
+		this.updatedBy = updatedBy;
+		this.updatedTS = updatedTS;
+		this.idStatus = idStatus;
+		this.idTeam = idTeam;
+		this.idLocation = idLocation;
+		this.jobDesc = jobDesc;
+		this.hiringManager = hiringManager;
+		this.idPosition = idPosition;
+	}
 	public Integer getIdOpportunity() {
 		return idOpportunity;
 	}

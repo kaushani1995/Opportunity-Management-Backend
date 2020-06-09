@@ -5,13 +5,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.zalando.problem.ProblemModule;
@@ -38,125 +41,77 @@ class OppmangControllerTest {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	private List<Location> locations;
-	private List<Position> positions;
-	private List<Skillset> skillset;
-	private List<Status> statuses;
-	private List<Team> teams;
-	private List<User> users;
+	private Map<Integer, String> testMap;
+	private Map<String, String> userMap;
 	
 	@BeforeEach
 	void setUp() {
+		this.testMap = new HashMap<Integer, String>();
+		this.testMap.put(1, "one");
+		this.testMap.put(2, "two");
+		this.testMap.put(3, "three");
+		
+		
 		objectMapper.registerModule(new ProblemModule()); 
         objectMapper.registerModule(new ConstraintViolationProblemModule());
 	}
 	
 	@Test
     void shouldFetchLocations() throws Exception {
-		this.locations = new ArrayList<>();
-		this.locations.add(new Location(1, "Bangalore"));
-		this.locations.add(new Location(2, "Mumbai"));
-		final Integer idLocation = 1;
-		final Location location = new Location(1, "Bangalore");
 		
-		given(oppmangServiceImpl.getLocations()).willReturn(locations);
+		given(oppmangServiceImpl.getLocations()).willReturn(testMap);
 
         this.mockMvc.perform(get("/oppmang/locations"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", is(locations.size())));
+                .andExpect(jsonPath("$.size()", is(testMap.size())));
         
-        this.mockMvc.perform(get("/oppmang/locations/{id}", idLocation))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.name", is(location.getName()))); 
-        
-        this.mockMvc.perform(get("/oppmang/locations/{id}", 4))
-        .andExpect(status().isOk());
     }
 	
 	
 	@Test
     void shouldFetchPositions() throws Exception {
-		this.positions = new ArrayList<>();
-		this.positions.add(new Position(1, "Intern"));
-		this.positions.add(new Position(2, "Senior SD"));
-		this.positions.add(new Position(3, "Manager"));
-        final Integer idPosition = 2;
-        final Position position = new Position(2, "Senior SD");
         
-        given(oppmangServiceImpl.getPositions()).willReturn(positions);
+        given(oppmangServiceImpl.getPositions()).willReturn(testMap);
         
         this.mockMvc.perform(get("/oppmang/positions"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.size()", is(positions.size())));
-        
-        this.mockMvc.perform(get("/oppmang/positions/{id}", idPosition))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is(position.getName())));
-        
-        this.mockMvc.perform(get("/oppmang/positions/{id}", 4))
-        .andExpect(status().isOk());
+        .andExpect(jsonPath("$.size()", is(testMap.size())));
+
         
     }
 	
 	@Test
     void shouldFetchSkillsets() throws Exception {
-		this.skillset = new ArrayList<>();
-		this.skillset.add(new Skillset(1, "Angular"));
-		this.skillset.add(new Skillset(2, "C"));
 
-		 given(oppmangServiceImpl.getSkillsets()).willReturn(skillset);
+
+		 given(oppmangServiceImpl.getSkillsets()).willReturn(testMap);
 	        
 	        this.mockMvc.perform(get("/oppmang/skillsets"))
 	        .andExpect(status().isOk())
-	        .andExpect(jsonPath("$.size()", is(skillset.size())));
+	        .andExpect(jsonPath("$.size()", is(testMap.size())));
         
     }
 	
 	@Test
     void shouldFetchStatuses() throws Exception {
-		this.statuses = new ArrayList<>();
-		this.statuses.add(new Status(1, "Active"));
-		this.statuses.add(new Status(2, "Inactive"));
-		
-        final Integer idStatus = 2;
-        final Status status = new Status(2, "Inactive");
         
-        given(oppmangServiceImpl.getStatuses()).willReturn(statuses);
+        given(oppmangServiceImpl.getStatuses()).willReturn(testMap);
         
         this.mockMvc.perform(get("/oppmang/statuses"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.size()", is(statuses.size())));
-        
-        this.mockMvc.perform(get("/oppmang/statuses/{id}", idStatus))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.currStatus", is(status.getCurrStatus())));
-        
-        this.mockMvc.perform(get("/oppmang/statuses/{id}", 5))
-        .andExpect(status().isOk());
+        .andExpect(jsonPath("$.size()", is(testMap.size())));
         
     }
 	
 	@Test
     void shouldFetchTeams() throws Exception {
-		this.teams = new ArrayList<>();
-		this.teams.add(new Team(1, "Morgan Stanley"));
-		this.teams.add(new Team(2, "Prudential"));
-		this.teams.add(new Team(3, "FedEx"));
-        final Integer idTeam = 3;
-        final Team team = new Team(3, "FedEx");
         
-        given(oppmangServiceImpl.getTeams()).willReturn(teams);
+        given(oppmangServiceImpl.getTeams()).willReturn(testMap);
         
         this.mockMvc.perform(get("/oppmang/teams"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.size()", is(teams.size())));
+        .andExpect(jsonPath("$.size()", is(testMap.size())));
         
-        this.mockMvc.perform(get("/oppmang/teams/{id}", idTeam))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is(team.getName())));
-        
-        this.mockMvc.perform(get("/oppmang/teams/{id}", 6))
-        .andExpect(status().isOk());
     }
 	
 	@Test
@@ -175,18 +130,19 @@ class OppmangControllerTest {
 	
 	@Test
     void shouldFetchUsers() throws Exception {
-		this.users = new ArrayList<>();
-		this.users.add(new User("kaushani.ani@gmail.com", "Kaushani", "Admin"));
-		this.users.add(new User("kaushani@gmail.com", "Kaushani2", "Admin"));
-		this.users.add(new User("kaushani.chaudhuryi@gmail.com", "Kaushani3", "NotAdmin"));
+		this.userMap = new HashMap<>();
+		this.userMap.put("kaushani.ani@gmail.com", "Kaushani");
+		this.userMap.put("kaushani@gmail.com", "Kaushani2");
+		this.userMap.put("kaushani.chaudhuryi@gmail.com",  "Kaushani3");
 
-		given(oppmangServiceImpl.getUsers()).willReturn(users);
+		given(oppmangServiceImpl.getUsers()).willReturn(userMap);
         
         this.mockMvc.perform(get("/oppmang/users"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.size()", is(users.size())));
+        .andExpect(jsonPath("$.size()", is(userMap.size())));
         
     }
+	
 	
 	@Test
     void shouldFetchOpportunities() throws Exception {
@@ -199,25 +155,56 @@ class OppmangControllerTest {
 	@Test
     void shouldFetchOpportunity() throws Exception {
         final Integer idOpportunity = 1;
+        final List<Integer> skills = new ArrayList<>();
+        skills.add(1);skills.add(2);skills.add(3);
         final Opportunity opportunity = new Opportunity(1, "sampleemail", new Timestamp(0), "updatedby", new Timestamp(0), 2, 1, 3, "description", "manager", 2);
-
-        given(oppmangServiceImpl.getOpportunity(idOpportunity)).willReturn(opportunity);
+        final OppAndSkills oppAndSkills = new OppAndSkills(opportunity, skills);
+        
+        given(oppmangServiceImpl.getOpportunity(idOpportunity)).willReturn(oppAndSkills);
         
         this.mockMvc.perform(get("/oppmang/opportunities/{id}", idOpportunity))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.createdBy", is(opportunity.getCreatedBy())));
+        .andExpect(status().isOk());
         
     }
 	
 	
-	/*@Test
+	@SuppressWarnings("deprecation")
+	@Test
     void shouldUpdateOpportunity() throws Exception {
+		final Integer idOpportunity = 1;
+        final List<Integer> skills = new ArrayList<>();
+        skills.add(1);skills.add(2);skills.add(3);
+        final Opportunity opportunity = new Opportunity(1, "sampleemail", new Timestamp(0), "updatedby", new Timestamp(0), 2, 1, 3, "description", "manager", 2);
+        final OppAndSkills oppAndSkills = new OppAndSkills(opportunity, skills);
        
-    
-        ((MockHttpServletRequestBuilder) this.mockMvc.perform(put("/oppmang/opportunities/{id}"))
-                .andExpect(status().isOk())).contentType(MediaType.APPLICATION_JSON_UTF8);
+		given(oppmangServiceImpl.updateOpportunity(oppAndSkills)).willReturn(1);
         
-    }*/
+        this.mockMvc.perform(put("/oppmang/opportunities/{id}", idOpportunity)
+        .contentType(MediaType.APPLICATION_JSON_UTF8)
+        .content(objectMapper.writeValueAsString(oppAndSkills)))
+        .andExpect(status().isOk());
+
+   
+        
+    }
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	void shouldAddOpportunity() throws Exception {
+        final List<Integer> skills = new ArrayList<>();
+        skills.add(1);skills.add(2);skills.add(3);
+        final Opportunity opportunity = new Opportunity(1, "sampleemail", new Timestamp(0), "updatedby", new Timestamp(0), 2, 1, 3, "description", "manager", 2);
+        final OppAndSkills oppAndSkills = new OppAndSkills(opportunity, skills);
+       
+		given(oppmangServiceImpl.addOpportunity(oppAndSkills)).willReturn(1);
+        
+        this.mockMvc.perform(post("/oppmang/opportunities")
+        		.contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(oppAndSkills)))
+                .andExpect(status().isOk());
+   
+        
+    }
 	
 	@Test
     void shouldDeleteOpportunity() throws Exception {

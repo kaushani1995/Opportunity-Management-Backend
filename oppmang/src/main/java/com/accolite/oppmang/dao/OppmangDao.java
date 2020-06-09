@@ -2,34 +2,35 @@ package com.accolite.oppmang.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import com.accolite.oppmang.model.*;
 
 
 public interface OppmangDao {
 	
-	public List<Opportunity> getOpportunities();
+	public List<OppAndSkills> getOpportunities();
 	
-	public List<Location> getLocations();
+	public Map<Integer, String> getLocations();
 	
-	public List<Position> getPositions();
+	public Map<Integer, String> getPositions();
 	
-	public List<Skillset> getSkillsets();
+	public Map<Integer, String> getSkillsets();
 	
-	public List<Status> getStatuses();
+	public Map<Integer, String> getStatuses();
 	
-	public List<Team> getTeams();
+	public Map<Integer, String> getTeams();
 	
-	public int addOpportunity(Opportunity opportunity);
+	public int addOpportunity(OppAndSkills oppAndSkills);
 	
-	public int updateOpportunity(Opportunity opportunity);
+	public int updateOpportunity(OppAndSkills oppAndSkills);
 	
 	public int deleteOpportunity(int id);
 	
-	public Opportunity getOpportunity(int id);
+	public OppAndSkills getOpportunity(int id);
 	
 	public User getUser(String email);
 
-	public List<User> getUsers();
+	public Map<String, String> getUsers();
 
 }

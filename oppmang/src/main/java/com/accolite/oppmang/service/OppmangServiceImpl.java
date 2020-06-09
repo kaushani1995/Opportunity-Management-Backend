@@ -1,17 +1,13 @@
 package com.accolite.oppmang.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accolite.oppmang.dao.OppmangDaoImpl;
-import com.accolite.oppmang.model.Location;
-import com.accolite.oppmang.model.Opportunity;
-import com.accolite.oppmang.model.Position;
-import com.accolite.oppmang.model.Skillset;
-import com.accolite.oppmang.model.Status;
-import com.accolite.oppmang.model.Team;
+import com.accolite.oppmang.model.OppAndSkills;
 import com.accolite.oppmang.model.User;
 
 @Service
@@ -21,52 +17,52 @@ public class OppmangServiceImpl implements OppmangService{
 	private OppmangDaoImpl oppmangDao;
 
 	@Override
-	public List<Opportunity> getOpportunities() {
+	public List<OppAndSkills> getOpportunities() {
 
 		return oppmangDao.getOpportunities();
 		
 	}
 
 	@Override
-	public List<Location> getLocations() {
+	public Map<Integer, String> getLocations() {
 
 		return oppmangDao.getLocations();
 	}
 
 	@Override
-	public List<Position> getPositions() {
+	public Map<Integer, String> getPositions() {
 		
 		return oppmangDao.getPositions();
 	}
 
 	@Override
-	public List<Skillset> getSkillsets() {
+	public Map<Integer, String> getSkillsets() {
 
 		return oppmangDao.getSkillsets();
 	}
 
 	@Override
-	public List<Status> getStatuses() {
+	public Map<Integer, String> getStatuses() {
 	
 		return oppmangDao.getStatuses();
 	}
 
 	@Override
-	public List<Team> getTeams() {
+	public Map<Integer, String> getTeams() {
 		
 		return oppmangDao.getTeams();
 	}
 
 	@Override
-	public int addOpportunity(Opportunity opportunity) {
+	public int addOpportunity(OppAndSkills oppAndSkills) {
 		
-		return oppmangDao.addOpportunity(opportunity);
+		return oppmangDao.addOpportunity(oppAndSkills);
 	}
 
 	@Override
-	public int updateOpportunity(Opportunity opportunity) {
+	public int updateOpportunity(OppAndSkills oppAndSkills) {
 	
-		return oppmangDao.updateOpportunity(opportunity);
+		return oppmangDao.updateOpportunity(oppAndSkills);
 	}
 
 	@Override
@@ -76,7 +72,7 @@ public class OppmangServiceImpl implements OppmangService{
 	}
 
 	@Override
-	public Opportunity getOpportunity(int id) {
+	public OppAndSkills getOpportunity(int id) {
 
 		return oppmangDao.getOpportunity(id);
 	}
@@ -88,7 +84,7 @@ public class OppmangServiceImpl implements OppmangService{
 	}
 	
 	@Override
-	public List<User> getUsers() {
+	public Map<String, String> getUsers() {
 
 		return oppmangDao.getUsers();
 	}

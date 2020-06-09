@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.accolite.oppmang.model.*;
 import java.util.List;
+import java.util.Map;
 
 import com.accolite.oppmang.service.OppmangServiceImpl;
 
@@ -18,85 +19,85 @@ public class OppmangController {
 	
 	@GetMapping(value = "/opportunities")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public List<Opportunity> getOpportunities() {
+	public List<OppAndSkills> getOpportunities() {
 
 		return oppmangService.getOpportunities();
 	}
 
 	@GetMapping(value = "/locations")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public List<Location> getLocations() {
+	public Map<Integer, String> getLocations() {
 
 		return oppmangService.getLocations();
 	}
 	
-	@GetMapping(value = "/locations/{id}")
+	/*@GetMapping(value = "/locations/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Location getLocation(@PathVariable int id) {
 		for(Location location : this.getLocations()) {
 			if(location.getIdLocation()==id) { return location;}
 		}
 		return null;
-	}
+	}*/
 	
 	@GetMapping(value = "/positions")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public List<Position> getPositions() {
+	public Map<Integer, String> getPositions() {
 		
 		return oppmangService.getPositions();
 	}
 	
-	@GetMapping(value = "/positions/{id}")
+	/*@GetMapping(value = "/positions/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Position getPosition(@PathVariable int id) {
 		for(Position position : this.getPositions()) {
 			if(position.getIdPosition()==id) { return position;}
 		}
 		return null;
-	}
+	}*/
 	
 	@GetMapping(value = "/skillsets")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public List<Skillset> getSkillsets() {
+	public Map<Integer, String> getSkillsets() {
 
 		return oppmangService.getSkillsets();
 	}
 	
 	@GetMapping(value = "/statuses")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public  List<Status> getStatues(){
+	public  Map<Integer, String> getStatues(){
 		return oppmangService.getStatuses();
 	}
 	
-	@GetMapping(value = "/statuses/{id}")
+	/*@GetMapping(value = "/statuses/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Status getStatus(@PathVariable int id) {
 		for(Status status : this.getStatues()) {
 			if(status.getIdStatus()==id) { return status;}
 		}
 		return null;
-	}
+	}*/
 	
 	@GetMapping(value = "/teams")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public List<Team> getTeams() {
+	public Map<Integer, String> getTeams() {
 		
 		return oppmangService.getTeams();
 	}
 	
-	@GetMapping(value = "/teams/{id}")
+	/*@GetMapping(value = "/teams/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Team getTeam(@PathVariable int id) {
 		for(Team team : this.getTeams()) {
 			if(team.getIdTeam()==id) { return team;}
 		}
 		return null; 
-	}
+	}*/
 	
 	
 	@GetMapping(value = "/users")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public List<User> getUsers() {
+	public Map<String, String> getUsers() {
 		
 		return oppmangService.getUsers();
 	}
@@ -109,17 +110,17 @@ public class OppmangController {
 	}
 
 	@PostMapping(value = "/opportunities", consumes = "application/json", produces = "application/json")
-	@CrossOrigin(origins = "http://localhost:4200")
-	public int addOpportunity(@RequestBody Opportunity opportunity) {
+	//@CrossOrigin(origins = "http://localhost:4200")
+	public int addOpportunity(@RequestBody OppAndSkills oppAndSkills) {
 		
-		return oppmangService.addOpportunity(opportunity);
+		return oppmangService.addOpportunity(oppAndSkills);
 	}
 
 	@PutMapping(value = "/opportunities/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public int updateOpportunity(@RequestBody Opportunity opportunity) {
+	public int updateOpportunity(@RequestBody OppAndSkills oppAndSkills) {
 	
-		return oppmangService.updateOpportunity(opportunity);
+		return oppmangService.updateOpportunity(oppAndSkills);
 	}
 
 	@DeleteMapping(value = "/opportunities/{id}")
@@ -131,7 +132,7 @@ public class OppmangController {
 
 	@GetMapping(value = "/opportunities/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public Opportunity getOpportunity(@PathVariable int id) {
+	public OppAndSkills getOpportunity(@PathVariable int id) {
 
 		return oppmangService.getOpportunity(id);
 	}

@@ -1,38 +1,35 @@
 package com.accolite.oppmang.service;
 
 import java.util.List;
+import java.util.Map;
 
-import com.accolite.oppmang.model.Location;
-import com.accolite.oppmang.model.Opportunity;
-import com.accolite.oppmang.model.Position;
-import com.accolite.oppmang.model.Skillset;
-import com.accolite.oppmang.model.Status;
-import com.accolite.oppmang.model.Team;
+import com.accolite.oppmang.model.OppAndSkills;
+
 import com.accolite.oppmang.model.User;
 
 public interface OppmangService {
 	
-	public List<Opportunity> getOpportunities();
+	public List<OppAndSkills> getOpportunities();
 	
-	public List<Location> getLocations();
+	public Map<Integer, String> getLocations();
 	
-	public List<Position> getPositions();
+	public Map<Integer, String> getPositions();
 	
-	public List<Skillset> getSkillsets();
+	public Map<Integer, String> getSkillsets();
 	
-	public List<Status> getStatuses();
+	public Map<Integer, String> getStatuses();
 	
-	public List<Team> getTeams();
+	public Map<Integer, String> getTeams();
 	
-	public int addOpportunity(Opportunity opportunity);
+	public int addOpportunity(OppAndSkills oppAndSkills);
 	
-	public int updateOpportunity(Opportunity opportunity);
+	public int updateOpportunity(OppAndSkills oppAndSkills);
 	
 	public int deleteOpportunity(int id);
 	
-	public Opportunity getOpportunity(int id);
+	public OppAndSkills getOpportunity(int id);
 	
-	public List<User> getUsers();
+	public Map<String, String> getUsers();
 	
 	public User getUser(String email);
 }

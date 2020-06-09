@@ -5,13 +5,13 @@ import java.util.List;
 public class OppAndSkills {
 	
 	private Opportunity opportunity;
-	private List<Skillset> skillset;
+	private List<Integer> skillset;
 	
 	public OppAndSkills() {
 		super();
 	}
 
-	public OppAndSkills(Opportunity opportunity, List<Skillset> skillset) {
+	public OppAndSkills(Opportunity opportunity, List<Integer> skillset) {
 		super();
 		this.opportunity = opportunity;
 		this.skillset = skillset;
@@ -23,10 +23,10 @@ public class OppAndSkills {
 	public void setOpportunity(Opportunity opportunity) {
 		this.opportunity = opportunity;
 	}
-	public List<Skillset> getSkillset() {
+	public List<Integer> getSkillset() {
 		return skillset;
 	}
-	public void setSkillset(List<Skillset> skillset) {
+	public void setSkillset(List<Integer> skillset) {
 		this.skillset = skillset;
 	}
 	

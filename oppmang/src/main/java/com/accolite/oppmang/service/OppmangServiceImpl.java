@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.accolite.oppmang.dao.OppmangDaoImpl;
 import com.accolite.oppmang.model.OppAndSkills;
+import com.accolite.oppmang.model.Skillset;
+import com.accolite.oppmang.model.Trend;
 import com.accolite.oppmang.model.User;
 
 @Service
@@ -39,6 +41,12 @@ public class OppmangServiceImpl implements OppmangService{
 	public Map<Integer, String> getSkillsets() {
 
 		return oppmangDao.getSkillsets();
+	}
+	
+	@Override
+	public List<Skillset> getSkillsetsobj() {
+
+		return oppmangDao.getSkillsetsobj();
 	}
 
 	@Override
@@ -87,6 +95,12 @@ public class OppmangServiceImpl implements OppmangService{
 	public Map<String, String> getUsers() {
 
 		return oppmangDao.getUsers();
+	}
+
+	@Override
+	public Trend getTrend(String trend) {
+
+		return oppmangDao.getTrend(trend);
 	}
 
 }

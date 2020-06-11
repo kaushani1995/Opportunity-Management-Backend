@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.accolite.oppmang.model.OppAndSkills;
-
+import com.accolite.oppmang.model.Skillset;
+import com.accolite.oppmang.model.Trend;
 import com.accolite.oppmang.model.User;
 
 public interface OppmangService {
@@ -16,6 +17,8 @@ public interface OppmangService {
 	public Map<Integer, String> getPositions();
 	
 	public Map<Integer, String> getSkillsets();
+	
+	public List<Skillset> getSkillsetsobj();
 	
 	public Map<Integer, String> getStatuses();
 	
@@ -32,4 +35,6 @@ public interface OppmangService {
 	public Map<String, String> getUsers();
 	
 	public User getUser(String email);
+	
+	public Trend getTrend(String trend);
 }

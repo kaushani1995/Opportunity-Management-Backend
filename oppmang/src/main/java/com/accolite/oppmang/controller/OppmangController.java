@@ -63,6 +63,13 @@ public class OppmangController {
 		return oppmangService.getSkillsets();
 	}
 	
+	@GetMapping(value = "/skillsetsobj")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Skillset> getSkillsetsobj() {
+
+		return oppmangService.getSkillsetsobj();
+	}
+	
 	@GetMapping(value = "/statuses")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public  Map<Integer, String> getStatues(){
@@ -110,7 +117,7 @@ public class OppmangController {
 	}
 
 	@PostMapping(value = "/opportunities", consumes = "application/json", produces = "application/json")
-	//@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public int addOpportunity(@RequestBody OppAndSkills oppAndSkills) {
 		
 		return oppmangService.addOpportunity(oppAndSkills);
@@ -137,6 +144,11 @@ public class OppmangController {
 		return oppmangService.getOpportunity(id);
 	}
 	
-	
+	@GetMapping(value = "/trends/{type}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public Trend getTrend(@PathVariable String type) {
+		
+		return oppmangService.getTrend(type);
+	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accolite.oppmang.model.*;
+import com.accolite.oppmang.rowmapper.CountAttributeRowMapper;
 import com.accolite.oppmang.rowmapper.LocationRowMapper;
 import com.accolite.oppmang.rowmapper.OpportunityRowMapper;
 import com.accolite.oppmang.rowmapper.PositionRowMapper;
@@ -89,6 +90,15 @@ public class OppmangDaoImpl implements OppmangDao {
 		  
 		 return skiMap;
 	}
+	
+	@Override
+	public List<Skillset> getSkillsetsobj() {
+		 String query = "SELECT * from skillset";
+		 RowMapper<Skillset> rowMapper = new SkillsetRowMapper();
+		 List<Skillset> list = jdbcTemplate.query(query, rowMapper);
+		  
+		 return list;
+	}
 
 	@Override
 	public Map<Integer, String> getStatuses() {
@@ -118,7 +128,7 @@ public class OppmangDaoImpl implements OppmangDao {
 	public int addOpportunity(OppAndSkills oppAndSkills) {
 		String query = "INSERT INTO opportunity(idOpportunity, createdBy, createdTS, updatedBy, updatedTS,"
 				+ " idStatus, idLocation, idTeam, jobDesc, hiringManager, idPosition) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-		jdbcTemplate.update(query, oppAndSkills.getOpportunity().getIdOpportunity(), oppAndSkills.getOpportunity().getCreatedBy(),new Timestamp(System.currentTimeMillis()),
+		jdbcTemplate.update(query, null, oppAndSkills.getOpportunity().getCreatedBy(),new Timestamp(System.currentTimeMillis()),
 				null , null ,oppAndSkills.getOpportunity().getIdStatus(), oppAndSkills.getOpportunity().getIdLocation(),oppAndSkills.getOpportunity().getIdTeam(),
 				oppAndSkills.getOpportunity().getJobDesc(), oppAndSkills.getOpportunity().getHiringManager(), oppAndSkills.getOpportunity().getIdPosition());
 		
@@ -197,6 +207,33 @@ public class OppmangDaoImpl implements OppmangDao {
 		 list.forEach(ele -> { useMap.put(ele.getEmail(), ele.getName());});
 		  
 		 return useMap;
+	}
+
+	@Override
+	public Trend getTrend(String trend) {
+		String query = new String();
+		if(trend.equals("location")) {
+			query = "SELECT l.name, COUNT(l.name) as count FROM opportunity o JOIN location l ON o.idLocation = l.idLocation GROUP BY l.name;";
+		}
+		else if(trend.equals("team")) {
+			query = "SELECT t.name, COUNT(t.name) AS count FROM opportunity o JOIN team t ON o.idTeam = t.idTeam GROUP BY t.name;";
+		}
+		else if(trend.equals("skill")) {
+			query = "SELECT s.name, COUNT(s.name) AS count FROM oppskilljunction o JOIN skillset s ON o.idSkillSet = s.idSkillSet GROUP BY s.name;";
+		}
+		
+		RowMapper<CountAttribute> rowMapper = new CountAttributeRowMapper();
+		List<CountAttribute> list = jdbcTemplate.query(query, rowMapper);
+		
+		List<String> name = new ArrayList<>();
+		List<Integer> count = new ArrayList<>();
+		list.forEach(ele -> { 
+			name.add(ele.getName());
+			count.add(ele.getCount());
+		});
+		
+		Trend trend2 = new Trend(name, count);
+		return trend2;
 	}
 
 }

@@ -17,6 +17,8 @@ public interface OppmangDao {
 	
 	public Map<Integer, String> getSkillsets();
 	
+	public List<Skillset> getSkillsetsobj();
+	
 	public Map<Integer, String> getStatuses();
 	
 	public Map<Integer, String> getTeams();
@@ -32,5 +34,7 @@ public interface OppmangDao {
 	public User getUser(String email);
 
 	public Map<String, String> getUsers();
+	
+	public Trend getTrend(String trend);
 
 }

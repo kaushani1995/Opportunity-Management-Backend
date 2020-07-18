@@ -1,0 +1,6 @@
+2020-06-14 18:31:16 DEBUG OppmangController:26 - Controller-getOpportunities
+2020-06-14 18:33:02 DEBUG OppmangController:26 - Controller-getOpportunities
+2020-06-14 18:38:06 DEBUG OppmangController:26 - Controller-getOpportunities
+DEBUG   2020-06-14 18:49:54,761 [http-nio-8080-exec-1] com.accolite.oppmang.controller.OppmangController  - Controller-getOpportunities
+2020-06-14 19:02:04 DEBUG OppmangController:26 - Controller-getOpportunities
+2020-06-14 19:02:05 DEBUG OppmangController:26 - Controller-getOpportunities

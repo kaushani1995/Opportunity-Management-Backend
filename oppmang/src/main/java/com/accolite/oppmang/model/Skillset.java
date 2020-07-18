@@ -1,9 +1,14 @@
 package com.accolite.oppmang.model;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Skillset {
 	
+	private static Logger LOGGER = LogManager.getLogger(Skillset.class);
+	
 	public Skillset() {
 		super();
+		LOGGER.info("Object Of Class Created - Skillset");
 	}
 	private Integer idSkillset;
 	private String name;
@@ -12,6 +17,7 @@ public class Skillset {
 		super();
 		this.idSkillset = idSkillset;
 		this.name = name;
+		LOGGER.info("Object Of Class Created - Skillset");
 	}
 	public Integer getIdSkillset() {
 		return idSkillset;

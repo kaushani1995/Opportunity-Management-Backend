@@ -7,7 +7,12 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.accolite.oppmang.model.Opportunity;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class OpportunityRowMapper implements RowMapper<Opportunity> {
+	
+	private static Logger LOGGER = LogManager.getLogger(OpportunityRowMapper.class);
 
 	@Override
 	public Opportunity mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -25,6 +30,7 @@ public class OpportunityRowMapper implements RowMapper<Opportunity> {
 		opportunity.setUpdatedBy(rs.getString("updatedBy"));
 		opportunity.setUpdatedTS(rs.getTimestamp("updatedTS"));
 		
+		LOGGER.info("Object Of Class Created - OpportunityRowMapper");
 		return opportunity;
 	}
 

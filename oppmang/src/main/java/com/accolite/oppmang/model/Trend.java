@@ -1,8 +1,12 @@
 package com.accolite.oppmang.model;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class Trend {
+	
+	private static Logger LOGGER = LogManager.getLogger(Trend.class);
 	
 	private List<String> name;
 	private List<Integer> count;
@@ -10,6 +14,7 @@ public class Trend {
 	
 	public Trend() {
 		super();
+		LOGGER.info("Object Of Class Created - Trend");
 	}
 
 
@@ -17,6 +22,7 @@ public class Trend {
 		super();
 		this.name = name;
 		this.count = count;
+		LOGGER.info("Object Of Class Created - Trend");
 	}
 
 

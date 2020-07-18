@@ -23,9 +23,14 @@ import com.accolite.oppmang.rowmapper.StatusRowMapper;
 import com.accolite.oppmang.rowmapper.TeamRowMapper;
 import com.accolite.oppmang.rowmapper.UserRowMapper;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Transactional
 @Repository
 public class OppmangDaoImpl implements OppmangDao {
+	
+	private static Logger LOGGER = LogManager.getLogger(OppmangDaoImpl.class);
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -41,17 +46,18 @@ public class OppmangDaoImpl implements OppmangDao {
 		 List<OppAndSkills> oslist = new ArrayList<OppAndSkills>();
 		
 		 list.forEach(opp -> {
-		 RowMapper<Skillset> rowMapper2 = new SkillsetRowMapper();
-		 List<Skillset> list2 = jdbcTemplate.query(query2, rowMapper2, opp.getIdOpportunity());
+			 RowMapper<Skillset> rowMapper2 = new SkillsetRowMapper();
+			 List<Skillset> list2 = jdbcTemplate.query(query2, rowMapper2, opp.getIdOpportunity());
 		 
-		 List<Integer> list3 = new ArrayList<>();
-		 list2.forEach(ele -> {
-			 list3.add(ele.getIdSkillset());
-		 });
-			 
-		 oslist.add(new OppAndSkills(opp, list3));	 
+			 List<Integer> list3 = new ArrayList<>();
+			 list2.forEach(ele -> {
+				 list3.add(ele.getIdSkillset());
+			 });
+				 
+			 oslist.add(new OppAndSkills(opp, list3));	 
 		 });
 		 
+		 LOGGER.info("Dao - getOpportunities");
 		 return oslist;
 	}
 
@@ -63,7 +69,8 @@ public class OppmangDaoImpl implements OppmangDao {
 		 
 		 Map<Integer, String> locMap = new HashMap<>();
 		 list.forEach(ele -> { locMap.put(ele.getIdLocation(), ele.getName());});
-		  
+		 
+		 LOGGER.info("Dao - getLocations");
 		 return locMap;
 	}
 
@@ -76,6 +83,7 @@ public class OppmangDaoImpl implements OppmangDao {
 		 Map<Integer, String> posMap = new HashMap<>();
 		 list.forEach(ele -> { posMap.put(ele.getIdPosition(), ele.getName());});
 		  
+		 LOGGER.info("Dao - getPositions");
 		 return posMap;
 	}
 
@@ -88,6 +96,7 @@ public class OppmangDaoImpl implements OppmangDao {
 		 Map<Integer, String> skiMap = new HashMap<>();
 		 list.forEach(ele -> { skiMap.put(ele.getIdSkillset(), ele.getName());});
 		  
+		 LOGGER.info("Dao - getSkillsets");
 		 return skiMap;
 	}
 	
@@ -97,6 +106,7 @@ public class OppmangDaoImpl implements OppmangDao {
 		 RowMapper<Skillset> rowMapper = new SkillsetRowMapper();
 		 List<Skillset> list = jdbcTemplate.query(query, rowMapper);
 		  
+		 LOGGER.info("Dao - getSkillsetsobj");
 		 return list;
 	}
 
@@ -109,6 +119,7 @@ public class OppmangDaoImpl implements OppmangDao {
 		 Map<Integer, String> staMap = new HashMap<>();
 		 list.forEach(ele -> { staMap.put(ele.getIdStatus(), ele.getCurrStatus());});
 		  
+		 LOGGER.info("Dao - getStatuses");
 		 return staMap;
 	}
 
@@ -121,14 +132,16 @@ public class OppmangDaoImpl implements OppmangDao {
 		 Map<Integer, String> teaMap = new HashMap<>();
 		 list.forEach(ele -> { teaMap.put(ele.getIdTeam(), ele.getName());});
 		  
+		 LOGGER.info("Dao - getTeams");
 		 return teaMap;
 	}
 
 	@Override
 	public int addOpportunity(OppAndSkills oppAndSkills) {
+		int result;
 		String query = "INSERT INTO opportunity(idOpportunity, createdBy, createdTS, updatedBy, updatedTS,"
 				+ " idStatus, idLocation, idTeam, jobDesc, hiringManager, idPosition) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-		jdbcTemplate.update(query, null, oppAndSkills.getOpportunity().getCreatedBy(),new Timestamp(System.currentTimeMillis()),
+		result = jdbcTemplate.update(query, null, oppAndSkills.getOpportunity().getCreatedBy(),new Timestamp(System.currentTimeMillis()),
 				null , null ,oppAndSkills.getOpportunity().getIdStatus(), oppAndSkills.getOpportunity().getIdLocation(),oppAndSkills.getOpportunity().getIdTeam(),
 				oppAndSkills.getOpportunity().getJobDesc(), oppAndSkills.getOpportunity().getHiringManager(), oppAndSkills.getOpportunity().getIdPosition());
 		
@@ -141,15 +154,17 @@ public class OppmangDaoImpl implements OppmangDao {
 		jdbcTemplate.update(query3, opportunity.getIdOpportunity(), skill);
 		});
 		
-		return 1;
+		LOGGER.info("Dao - addOpportunity");
+		return result;
 
 	}
 
 	@Override
 	public int updateOpportunity(OppAndSkills oppAndSkills) {
+		int result;
 		String query = "UPDATE opportunity SET updatedBy=?, updatedTS=?,"
 				+ "idStatus=?, idLocation=?, idTeam=?, jobDesc=?, hiringManager=?, idPosition=? WHERE idOpportunity=?";
-		jdbcTemplate.update(query, oppAndSkills.getOpportunity().getUpdatedBy(), new Timestamp(System.currentTimeMillis()) ,oppAndSkills.getOpportunity().getIdStatus(), oppAndSkills.getOpportunity().getIdLocation(),oppAndSkills.getOpportunity().getIdTeam(),
+		result = jdbcTemplate.update(query, oppAndSkills.getOpportunity().getUpdatedBy(), new Timestamp(System.currentTimeMillis()) ,oppAndSkills.getOpportunity().getIdStatus(), oppAndSkills.getOpportunity().getIdLocation(),oppAndSkills.getOpportunity().getIdTeam(),
 				oppAndSkills.getOpportunity().getJobDesc(), oppAndSkills.getOpportunity().getHiringManager(), oppAndSkills.getOpportunity().getIdPosition(), oppAndSkills.getOpportunity().getIdOpportunity());
 		
 		String query2 = "DELETE FROM oppskilljunction WHERE idOpportunity = ?";
@@ -160,12 +175,14 @@ public class OppmangDaoImpl implements OppmangDao {
 			jdbcTemplate.update(query3, oppAndSkills.getOpportunity().getIdOpportunity(), skill);
 		});
 		
-		return 1;
+		LOGGER.info("Dao - updateOpportunity");
+		return result;
 	}
 
 	@Override
 	public int deleteOpportunity(int id) {
 		String query = "DELETE FROM opportunity WHERE idOpportunity=?";
+		LOGGER.info("Dao - deleteOpportunity");
 		return jdbcTemplate.update(query, id);
 	}
 
@@ -186,6 +203,7 @@ public class OppmangDaoImpl implements OppmangDao {
 		 
 		 OppAndSkills oppAndSkills = new OppAndSkills(opportunity, list3);
 		 
+		 LOGGER.info("Dao - getOpportunity");
 		 return oppAndSkills;
 	}
 
@@ -194,6 +212,8 @@ public class OppmangDaoImpl implements OppmangDao {
 		String query = "SELECT * FROM user WHERE email = ?";
 		RowMapper<User> rowMapper = new BeanPropertyRowMapper<User>(User.class);
 		User user = jdbcTemplate.queryForObject(query, rowMapper, email);
+		
+		LOGGER.info("Dao - getUser");
 		return user;
 	}
 
@@ -205,7 +225,8 @@ public class OppmangDaoImpl implements OppmangDao {
 		 
 		 Map<String, String> useMap = new HashMap<>();
 		 list.forEach(ele -> { useMap.put(ele.getEmail(), ele.getName());});
-		  
+		 
+		 LOGGER.info("Dao - getUsers");
 		 return useMap;
 	}
 
@@ -233,6 +254,8 @@ public class OppmangDaoImpl implements OppmangDao {
 		});
 		
 		Trend trend2 = new Trend(name, count);
+		
+		LOGGER.info("Dao - getTrend");
 		return trend2;
 	}
 

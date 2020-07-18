@@ -1,9 +1,14 @@
 package com.accolite.oppmang.model;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Position {
 	
+	private static Logger LOGGER = LogManager.getLogger(Position.class);
+	
 	public Position() {
 		super();
+		LOGGER.info("Object Of Class Created - Position");
 	}
 	private Integer idPosition;
 	private String name;
@@ -12,6 +17,7 @@ public class Position {
 		super();
 		this.idPosition = idPosition;
 		this.name = name;
+		LOGGER.info("Object Of Class Created - Position");
 	}
 	
 	public Integer getIdPosition() {

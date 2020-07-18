@@ -43,6 +43,8 @@ class OppmangControllerTest {
 	
 	private Map<Integer, String> testMap;
 	private Map<String, String> userMap;
+	private Trend trend;
+	private List<Skillset> skills;
 	
 	@BeforeEach
 	void setUp() {
@@ -215,7 +217,35 @@ class OppmangControllerTest {
         
     }
 	
+	@Test
+    void shouldFetchTrend() throws Exception {
+		final List<String> name = new ArrayList<>();
+		name.add("One");name.add("two");name.add("Three");
+		final List<Integer> count = new ArrayList<>();
+		count.add(1);count.add(2);count.add(3);
+		this.trend = new Trend(name, count);
+
+		given(oppmangServiceImpl.getTrend("location")).willReturn(trend);
+        
+        this.mockMvc.perform(get("/oppmang/trends/{type}", "location"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.name.size()", is(trend.getName().size())));
+        
+    }
 	
+	@Test
+    void shouldFetchSkillSetObj() throws Exception {
+		this.skills = new ArrayList<>();
+		skills.add(new Skillset(1, "C"));
+		skills.add(new Skillset(2, "Java"));
+		
+		given(oppmangServiceImpl.getSkillsetsobj()).willReturn(skills);
+
+        this.mockMvc.perform(get("/oppmang/skillsetsobj"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()", is(skills.size())));
+        
+    }
 	
 	
 }

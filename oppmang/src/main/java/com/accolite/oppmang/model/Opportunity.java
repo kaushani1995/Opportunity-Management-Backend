@@ -1,6 +1,8 @@
 package com.accolite.oppmang.model;
 
 import java.sql.Timestamp;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Opportunity {
 	
@@ -15,8 +17,12 @@ public class Opportunity {
 	private String jobDesc;
 	private String hiringManager;
 	private Integer idPosition;
+	
+	private static Logger LOGGER = LogManager.getLogger(Opportunity.class);
+	
 	public Opportunity() {
 		super();
+		LOGGER.info("Object Of Class Created - Opportunity");
 	}
 	public Opportunity(Integer idOpportunity, String createdBy, Timestamp createdTS, String updatedBy,
 			Timestamp updatedTS, Integer idStatus, Integer idTeam, Integer idLocation, String jobDesc,
@@ -33,6 +39,7 @@ public class Opportunity {
 		this.jobDesc = jobDesc;
 		this.hiringManager = hiringManager;
 		this.idPosition = idPosition;
+		LOGGER.info("Object Of Class Created - Opportunity");
 	}
 	public Integer getIdOpportunity() {
 		return idOpportunity;

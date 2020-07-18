@@ -1,9 +1,14 @@
 package com.accolite.oppmang.model;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class User {
 	
+	private static Logger LOGGER = LogManager.getLogger(User.class);
+	
 	public User() {
 		super();
+		LOGGER.info("Object Of Class Created - User");
 	}
 	private String email;
 	private String name;
@@ -13,6 +18,7 @@ public class User {
 		this.email = email;
 		this.name = name;
 		this.role = role;
+		LOGGER.info("Object Of Class Created - User");
 	}
 	public String getEmail() {
 		return email;

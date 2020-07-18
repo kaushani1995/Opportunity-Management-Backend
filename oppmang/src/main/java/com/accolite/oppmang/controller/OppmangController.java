@@ -9,10 +9,15 @@ import java.util.Map;
 
 import com.accolite.oppmang.service.OppmangServiceImpl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 @RestController
 @RequestMapping(path = "/oppmang")
 public class OppmangController {
+	
+	private static Logger LOGGER = LogManager.getLogger(OppmangController.class);
 
 	@Autowired
 	private OppmangServiceImpl oppmangService;
@@ -20,7 +25,8 @@ public class OppmangController {
 	@GetMapping(value = "/opportunities")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<OppAndSkills> getOpportunities() {
-
+		
+		LOGGER.info("Controller - getOpportunities");
 		return oppmangService.getOpportunities();
 	}
 
@@ -28,6 +34,7 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Map<Integer, String> getLocations() {
 
+		LOGGER.info("Controller - getLocations");
 		return oppmangService.getLocations();
 	}
 	
@@ -44,6 +51,7 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Map<Integer, String> getPositions() {
 		
+		LOGGER.info("Controller - getPositions");
 		return oppmangService.getPositions();
 	}
 	
@@ -59,7 +67,8 @@ public class OppmangController {
 	@GetMapping(value = "/skillsets")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Map<Integer, String> getSkillsets() {
-
+		
+		LOGGER.info("Controller - getSkillsets");
 		return oppmangService.getSkillsets();
 	}
 	
@@ -67,12 +76,15 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Skillset> getSkillsetsobj() {
 
+		LOGGER.info("Controller - getSkillsetsobj");
 		return oppmangService.getSkillsetsobj();
 	}
 	
 	@GetMapping(value = "/statuses")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public  Map<Integer, String> getStatues(){
+		
+		LOGGER.info("Controller - getStatues");
 		return oppmangService.getStatuses();
 	}
 	
@@ -89,6 +101,7 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Map<Integer, String> getTeams() {
 		
+		LOGGER.info("Controller - getTeams");
 		return oppmangService.getTeams();
 	}
 	
@@ -106,6 +119,7 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Map<String, String> getUsers() {
 		
+		LOGGER.info("Controller - getUsers");
 		return oppmangService.getUsers();
 	}
 	
@@ -113,6 +127,7 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public User getUser(@PathVariable String email) {
 		
+		LOGGER.info("Controller - getUsers");
 		return oppmangService.getUser(email);
 	}
 
@@ -120,6 +135,7 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public int addOpportunity(@RequestBody OppAndSkills oppAndSkills) {
 		
+		LOGGER.info("Controller - addOpportunity");
 		return oppmangService.addOpportunity(oppAndSkills);
 	}
 
@@ -127,6 +143,7 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public int updateOpportunity(@RequestBody OppAndSkills oppAndSkills) {
 	
+		LOGGER.info("Controller - updateOpportunity");
 		return oppmangService.updateOpportunity(oppAndSkills);
 	}
 
@@ -134,6 +151,7 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public int deleteOpportunity(@PathVariable int id) {
 		
+		LOGGER.info("Controller - deleteOpportunity");
 		return oppmangService.deleteOpportunity(id);
 	}
 
@@ -141,6 +159,7 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public OppAndSkills getOpportunity(@PathVariable int id) {
 
+		LOGGER.info("Controller - getOpportunity");
 		return oppmangService.getOpportunity(id);
 	}
 	
@@ -148,6 +167,7 @@ public class OppmangController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Trend getTrend(@PathVariable String type) {
 		
+		LOGGER.info("Controller - getTrend");
 		return oppmangService.getTrend(type);
 	}
 

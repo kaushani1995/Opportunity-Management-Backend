@@ -1,7 +1,0 @@
-package com.accolite.oppmang.rowmapper;
-
-import org.springframework.jdbc.core.RowMapper;
-
-public class UserRowMapper implements RowMapper<T> {
-
-}
